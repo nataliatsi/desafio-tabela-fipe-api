@@ -6,10 +6,7 @@ import com.nataliatsi.tabelafipe.model.Veiculo;
 import com.nataliatsi.tabelafipe.service.ConsumoApi;
 import com.nataliatsi.tabelafipe.service.ConverteDados;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
     private final Scanner scanner = new Scanner(System.in);
@@ -45,7 +42,7 @@ public class Menu {
 
         obterListaDeMarcas(endereco);
 
-        System.out.println("Informe o código da marca para consultar os modelos: ");
+        System.out.println("\nInforme o código da marca para consultar os modelos: ");
         String codMarca = scanner.nextLine();
         endereco = endereco + "/" + codMarca + "/modelos";
         List<Dados> modelosLista = consultarModelosPorMarca(endereco);
@@ -57,7 +54,7 @@ public class Menu {
 
         consultarVeiculosPorModelo(modelosLista);
 
-        System.out.println("Digite o código do modelo: ");
+        System.out.println("\nDigite o código do modelo: ");
         String codModelo = scanner.nextLine();
         endereco = endereco + "/" + codModelo + "/anos";
         consultarVeiculosPorModeloAno(endereco);
@@ -93,7 +90,7 @@ public class Menu {
     }
 
     private void consultarVeiculosPorModelo(List<Dados> modelosLista) {
-        System.out.println("Informe o nome do modelo para consultar os veículos: ");
+        System.out.println("\nInforme o nome do modelo para consultar o(s) veículo(s): ");
         var nomeVeiculo = scanner.nextLine();
 
         List<Dados> dadosList = modelosLista.stream()
@@ -117,8 +114,8 @@ public class Menu {
             veiculos.add(veiculo);
         }
 
-        System.out.println("Veículos: ");
-        veiculos.forEach(System.out::println);
+        System.out.println("\nLista de Veículo(s) que correspondem com a sua busca: ");
+        veiculos.stream().sorted(Comparator.comparing(Veiculo::valor).reversed()).forEach(System.out::println);
 
     }
 

@@ -11,4 +11,10 @@ public record Veiculo(
         @JsonAlias("AnoModelo") int anoModelo,
         @JsonAlias("Combustivel") String combustivel,
         @JsonAlias("CodigoFipe") String codigoFipe
-) {}
+) {
+    @Override
+    public String toString() {
+        return String.format("Modelo: %s, Valor: %s, Marca: %s, Ano do Modelo: %d, Combustivel: %s, Código Fipe: %s",
+                modelo, valor, marca, anoModelo, combustivel, codigoFipe);
+    }
+}
